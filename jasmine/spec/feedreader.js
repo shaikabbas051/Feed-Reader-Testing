@@ -36,7 +36,7 @@ $(function() {
             for(var i = 0; i < allFeeds.length; i++){
                 expect(allFeeds[i].url).toBeDefined();
             }
-         })
+         });
 
 
         /* TODO: Write a test that loops through each feed
@@ -47,7 +47,7 @@ $(function() {
             for(var i = 0; i < allFeeds.length; i++){
                 expect(allFeeds[i].name).toBeDefined();
             }
-         })
+         });
     });
 
 
@@ -61,7 +61,7 @@ $(function() {
          */
          it('Should hidden by default', function(){
             expect($('body').hasClass('menu-hidden')).toBe(true);
-         })
+         });
 
          /* TODO: Write a test that ensures the menu changes
           * visibility when the menu icon is clicked. This test
@@ -74,8 +74,8 @@ $(function() {
             $('.menu-icon-link').click();
             expect($('body').hasClass('menu-hidden')).toBe(true);
 
-          })
-    })
+          });
+    });
     /* TODO: Write a new test suite named "Initial Entries" */
     describe('Initial Entries', function(){
         /* TODO: Write a test that ensures when the loadFeed
@@ -87,12 +87,12 @@ $(function() {
          beforeEach(function(done){
             loadFeed(1,done());
             
-         })
+         });
          it('should have entries',function(done){
             expect($('.feed').length).toBeGreaterThan(0);
             done();
-         })
-    })
+         });
+    });
     /* TODO: Write a new test suite named "New Feed Selection" */
     describe('New Feed Selection', function(){
         /* TODO: Write a test that ensures when a new feed is loaded
@@ -103,11 +103,11 @@ $(function() {
          beforeEach(function(done){
             loadFeed(0, done);
             content = $('.feed').html();
-         })
+         });
          it('Should change content', function(done){
             loadFeed(0, done);
             expect($('.feed').html()).not.toEqual(content);
             //expect($('.feed').html() != content).toBe(true);
-         })
-    })
+         });
+    });
 }());
