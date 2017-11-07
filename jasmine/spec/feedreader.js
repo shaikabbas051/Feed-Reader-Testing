@@ -84,17 +84,20 @@ $(function() {
     /*new test suite named "New Feed Selection" */
     describe('New Feed Selection', function(){
          //Content changes with new feed
-         var content;
+         var feed1, feed2;
          beforeEach(function(done){
-            loadFeed(0, function(){
-              content = $('.feed').html();
+            loadFeed(1, function(){
+              feed1 = $('.feed').html();
               done();  
             });
             
          });
          it('Should change content', function(done){
-            loadFeed(1, done);
-            expect($('.feed').html()).not.toEqual(content);
+            loadFeed(2, function(){
+                feed2 = $('.feed').html();
+                expect(feed1).not.toEqual(feed2);
+                done();
+            });
             //expect($('.feed').html() != content).toBe(true);
          });
     });
