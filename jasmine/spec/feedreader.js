@@ -27,26 +27,25 @@ $(function() {
         });
 
 
-        /* TODO: Write a test that loops through each feed
-         * in the allFeeds object and ensures it has a URL defined
-         * and that the URL is not empty.
-         */
-
-         it('ensure allFeeds has URL and is not empty', function() {
-            for(var i = 0; i < allFeeds.length; i++){
+        // allFeeds has url and is not empty
+         it('ensure allFeeds has URL and is not empty', function(){ 
+            allFeeds.forEach(function(feed){
+                expect(feed.url).toBeTruthy();
+            });
+            /*for(var i = 0; i < allFeeds.length; i++){
                 expect(allFeeds[i].url).toBeDefined();
-            }
+            }*/
          });
 
 
-        /* TODO: Write a test that loops through each feed
-         * in the allFeeds object and ensures it has a name defined
-         * and that the name is not empty.
-         */
+        //allFeeds has name and is not empty
          it('ensure allFeeds has name and is not empty', function() {
-            for(var i = 0; i < allFeeds.length; i++){
+            allFeeds.forEach(function(feed){
+                expect(feed.name).toBeTruthy();
+            });
+            /*for(var i = 0; i < allFeeds.length; i++){
                 expect(allFeeds[i].name).toBeDefined();
-            }
+            }*/
          });
     });
 
@@ -59,6 +58,7 @@ $(function() {
          * the CSS to determine how we're performing the
          * hiding/showing of the menu element.
          */
+         //menu elements by default. Check it has menu-hidden class
          it('Should hidden by default', function(){
             expect($('body').hasClass('menu-hidden')).toBe(true);
          });
@@ -68,10 +68,11 @@ $(function() {
           * should have two expectations: does the menu display when
           * clicked and does it hide when clicked again.
           */
+          //when clicked on icon menu-hidden should false
           it('should show when clicked and should hide on clicked again', function(){
             $('.menu-icon-link').click();
-            expect($('body').hasClass('menu-hidden')).not.toBe(true);
-            $('.menu-icon-link').click();
+            expect($('body').hasClass('menu-hidden')).toBe(false);
+            $('.menu-icon-link').click();//when clicked again menu-hidden is true
             expect($('body').hasClass('menu-hidden')).toBe(true);
 
           });
@@ -85,11 +86,13 @@ $(function() {
          * the use of Jasmine's beforeEach and asynchronous done() function.
          */
          beforeEach(function(done){
-            loadFeed(1,done());
+            loadFeed(1, done);
             
          });
          it('should have entries',function(done){
-            expect($('.feed').length).toBeGreaterThan(0);
+            var elements = $('.feed .child');
+            expect(elements).toBeTruthy();
+            //expect($('.feed').length).toBeGreaterThan(0);
             done();
          });
     });
@@ -101,11 +104,14 @@ $(function() {
          */
          var content;
          beforeEach(function(done){
-            loadFeed(0, done);
-            content = $('.feed').html();
+            loadFeed(0, function(){
+              content = $('.feed').html();
+              done();  
+            });
+            
          });
          it('Should change content', function(done){
-            loadFeed(0, done);
+            loadFeed(1, done);
             expect($('.feed').html()).not.toEqual(content);
             //expect($('.feed').html() != content).toBe(true);
          });
